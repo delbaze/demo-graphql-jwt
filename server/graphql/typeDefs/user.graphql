@@ -1,0 +1,41 @@
+type User {
+  id: ID
+  username: String
+  firstname: String
+  lastname: String
+  password: String
+  roles: [String]
+  permissions: [String]
+}
+type UserInf {
+  id: ID
+  username: String
+  firstname: String
+  lastname: String
+  roles: [String]
+  permissions: [String]
+  success: Boolean #servira pour le fait que l'authentification se soit bien passée ou non
+}
+
+type Query {
+  listUsers: [User]
+  login(loginUserInput: LoginInput): UserInf
+  logout: Logout #ajout d'une fonction query qui renverra la clé success à true si tout s'est ien passé
+}
+
+type Logout {
+  success: Boolean
+}
+
+type Mutation {
+  register(registerUserInput: RegisterUserInput): UserInf
+}
+
+input RegisterUserInput {
+  username: String!
+  password: String!
+}
+input LoginInput {
+  username: String!
+  password: String!
+}
